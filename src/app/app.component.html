@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <form #f="ngForm">
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" 
+          class="form-control"
+          ngModel 
+          required
+          pattern="^[a-zA-Z]*$"
+          name="fname"
+          [(ngModel)]="fname"
+          #firstname="ngModel">
+        </div>
+        <span class="help-block" *ngIf="!firstname.valid && firstname.touched">Please enter valid name</span>
+        <div class="form-group">
+            <label for="lname">Last Name</label>
+            <input type="text" 
+            name="lname"
+            required
+            class="form-control" 
+            ngModel
+            [(ngModel)]="lname"
+            #lastname="ngModel" >           
+        </div>
+        <span class="help-block" *ngIf="!lastname.valid && lastname.touched">Please enter Last name</span>
+        <div class="form-group">
+              <label for="pnumber">Phone Number</label>
+              <input type="text" 
+              required
+              name="pnumber"
+              class="form-control" 
+              ngModel
+              #phonenumber="ngModel"
+              pattern="^[0-9]*$"
+              [(ngModel)]="pnumber"
+              #phonenumber="ngModel">
+        </div>
+        <span class="help-block" *ngIf="!phonenumber.valid && phonenumber.touched">Please enter valid PhoneNumber</span>
+        <div class="form-group">
+            <select            
+            name="select"
+            class="form-control"
+            [(ngModel)]="select"
+            ngModel
+            >
+                <option [value]="select" [disabled]=true>Select</option>
+                <option [ngValue]="item.value" *ngFor="let item of desigArray">{{item.value}}</option>
+            </select>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" [disabled]="!f.valid" 
+        (click)="onSubmit(fname,lname,pnumber,select)">Submit</button>
+      </form>
+      <hr>
+      <h3>Form Values</h3>
+      <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>Designation</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of nameArray">
+                <td>{{item.fname}}</td>
+                <td>{{item.lname}}</td>
+                <td>{{item.phone}}</td>
+                <td>{{item.designation}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+    </div>
+  </div>
+</div>
